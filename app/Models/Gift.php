@@ -11,9 +11,8 @@ class Gift extends Model
 
     protected $fillable = [
         'name',
-        'price',
         'url',
         'details',
+        'price',
     ];
-
 }

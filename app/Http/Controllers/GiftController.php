@@ -32,10 +32,10 @@ class GiftController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
-            'url' => 'nullable|url|starts_with:http://,https://',
-            'details' => 'nullable|string',
+            'name' => ['required', 'string', 'min:3', 'max:50'],
+            'url' => ['nullable', 'url', 'regex:/^https?:\/\//i'],
+            'details' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'decimal:0,2'],
         ]);
 
         Gift::create($validated);
@@ -68,10 +68,10 @@ class GiftController extends Controller
     public function update(Request $request, Gift $gift)
     {
         $validated = $request->validate([
-            'name' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
-            'url' => 'nullable|url|starts_with:http://,https://',
-            'details' => 'nullable|string',
+            'name' => ['required', 'string', 'min:3', 'max:50'],
+            'url' => ['nullable', 'url', 'regex:/^https?:\/\//i'],
+            'details' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'decimal:0,2'],
         ]);
 
         $gift->update($validated);
