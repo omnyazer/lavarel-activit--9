@@ -33,15 +33,16 @@ class GiftController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:50'],
-            'url' => ['nullable', 'url', 'regex:/^https?:\/\//i'],
+            'url' => ['nullable', 'url:http,https'],
             'details' => ['nullable', 'string'],
-            'price' => ['required', 'numeric', 'decimal:0,2'],
+            'price' => ['required', 'decimal:0,2'],
         ]);
 
         Gift::create($validated);
 
         return redirect()->route('gifts.index');
     }
+
 
 
     /**
@@ -69,15 +70,16 @@ class GiftController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:50'],
-            'url' => ['nullable', 'url', 'regex:/^https?:\/\//i'],
+            'url' => ['nullable', 'url:http,https'],
             'details' => ['nullable', 'string'],
-            'price' => ['required', 'numeric', 'decimal:0,2'],
+            'price' => ['required', 'decimal:0,2'],
         ]);
 
         $gift->update($validated);
 
         return redirect()->route('gifts.index');
     }
+
 
 
     /**
