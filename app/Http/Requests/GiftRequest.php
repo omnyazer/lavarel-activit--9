@@ -28,4 +28,38 @@ class GiftRequest extends FormRequest
             'price' => ['required', 'decimal:0,2'],
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Le nom du cadeau est obligatoire',
+            'name.min' => 'Le nom du cadeau doit contenir au moins :min caractères',
+            'name.max' => 'Le nom du cadeau ne peut pas dépasser :max caractères',
+
+            'price.required' => 'Le prix est obligatoire',
+            'price.decimal' => 'Le prix doit être un nombre avec au maximum deux décimales',
+
+            'url.url' => 'Le lien doit être une URL valide commençant par http ou https',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nom du cadeau',
+            'price' => 'prix',
+            'url' => 'lien',
+            'details' => 'détails',
+        ];
+    }
 }
