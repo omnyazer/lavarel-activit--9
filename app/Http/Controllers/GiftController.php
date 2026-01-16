@@ -39,7 +39,7 @@ class GiftController extends Controller
         Mail::raw(
             'Le cadeau ' . $gift->name . ' a bien été ajouté (' . $gift->price . '€)',
             function ($message) {
-                $message->to('test@example.com')
+               $message->to('omnya.zerghouni@cloud-campus.fr')
                         ->subject('Nouveau cadeau ajouté');
             }
         );
