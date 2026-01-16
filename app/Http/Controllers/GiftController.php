@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Gift;
 use App\Http\Requests\GiftRequest;
 use Illuminate\Support\Facades\Mail;
-
+use App\Mail\GiftCreated;
 
 
 class GiftController extends Controller
@@ -36,19 +36,14 @@ class GiftController extends Controller
     {
         $gift = Gift::create($request->validated());
 
-        Mail::raw(
-            'Le cadeau ' . $gift->name . ' a bien été ajouté (' . $gift->price . '€)',
-            function ($message) {
-               $message->to('omnya.zerghouni@cloud-campus.fr')
-                        ->subject('Nouveau cadeau ajouté');
-            }
-        );
+        Mail::to('omnya.zerghouni@cloud-campus.fr')
+            ->send(new GiftCreated($gift->name, $gift->price));
 
         return redirect()->route('gifts.index');
     }
 
 
-
+    
 
     /**
      * Display the specified resource.
